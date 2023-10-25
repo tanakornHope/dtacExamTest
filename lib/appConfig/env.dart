@@ -1,2 +1,3 @@
-const String randomuserApiEndpoint = 'https://randomuser.me/api?results=size';
+const String appBarTitle = "Dtac Exam Test";
+const String randomuserApiEndpoint = 'https://randomuser.me';
 const int amountUsersForDisplay = 10;
