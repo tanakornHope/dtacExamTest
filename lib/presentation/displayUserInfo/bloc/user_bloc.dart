@@ -12,7 +12,8 @@ class UserBloc extends Bloc<UserBlocEvent, UserBlocState> {
   UserBloc({required this.userService}) : super(const UserBlocState()) {
     on<GetUsersBlocEvent>((event, emit) async {
       developer.log('GetUsersBlocEvent');
-      await userService.getUsersService('10');
+      List<UserViewModel> listOfUserViewModel =
+          await userService.getUsersService('10');
     });
   }
 }

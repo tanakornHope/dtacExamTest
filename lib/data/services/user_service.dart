@@ -12,9 +12,9 @@ class UserServiceImpl implements UserService {
   @override
   Future<List<UserViewModel>> getUsersService(String amount) async {
     try {
-      List<UserViewModel> userResult =
+      List<UserViewModel> listOfUserViewModel =
           await userRepository.getUsersRepository(amount);
-      return userResult;
+      return listOfUserViewModel;
     } catch (_) {
       rethrow;
     }

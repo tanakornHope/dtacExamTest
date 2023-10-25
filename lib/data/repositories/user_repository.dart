@@ -14,7 +14,31 @@ class UserRepositoryImpl implements UserRepository {
   Future<List<UserViewModel>> getUsersRepository(String amount) async {
     try {
       UsersModel userResult = await userDataSource.getUsersDataSource(amount);
-      return List<UserViewModel>.empty();
+      List<UserViewModel> listOfUserViewModel = [];
+      listOfUserViewModel.addAll(
+        userResult.results!.map(
+          (userResultsElement) {
+            String name =
+                '${userResultsElement.name!.title} ${userResultsElement.name!.first} ${userResultsElement.name!.last}';
+            String gender = userResultsElement.gender.toString();
+            String email = userResultsElement.email.toString();
+            String age = userResultsElement.dob!.age.toString();
+            String mobileNumber = userResultsElement.phone.toString();
+            String imageUrl = userResultsElement.picture!.medium.toString();
+
+            return UserViewModel(
+              name: name,
+              gender: gender,
+              email: email,
+              age: age,
+              mobileNumber: mobileNumber,
+              imageUrl: imageUrl,
+            );
+          },
+        ),
+      );
+
+      return listOfUserViewModel;
     } catch (_) {
       rethrow;
     }
