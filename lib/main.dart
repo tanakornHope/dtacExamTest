@@ -23,7 +23,12 @@ class MyApp extends StatelessWidget {
       // home: const DisplayUsersInfo(),
       home: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => UserBloc()),
+          BlocProvider(
+            create: (context) => di.locator<UserBloc>()
+              ..add(
+                const GetUsersBlocEvent(),
+              ),
+          ),
         ],
         child: const DisplayUsersInfo(),
       ),

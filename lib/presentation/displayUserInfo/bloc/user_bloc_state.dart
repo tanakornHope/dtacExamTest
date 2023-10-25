@@ -5,3 +5,11 @@ class UserBlocState extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class GetUsersBlocState extends UserBlocState {
+  const GetUsersBlocState({required this.userViewModel});
+  final List<UserViewModel> userViewModel;
+
+  @override
+  List<Object?> get props => [userViewModel];
+}

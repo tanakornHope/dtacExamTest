@@ -5,3 +5,7 @@ class UserBlocEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class GetUsersBlocEvent extends UserBlocEvent {
+  const GetUsersBlocEvent();
+}
