@@ -1,4 +1,3 @@
-import 'dart:developer' as developer;
 import 'package:dtacexamtest/data/services/user_service.dart';
 import 'package:dtacexamtest/models/user/user_view_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
