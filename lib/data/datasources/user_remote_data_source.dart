@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dtacexamtest/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:dtacexamtest/appConfig/env.dart' as ENV;
@@ -14,9 +16,13 @@ class UserDataSourceImpl implements UserDataSource {
 
   @override
   Future<UsersModel> getUsersDataSource(String amount) async {
-    http.Response usersResult = await http.get(
-        Uri.parse('$_apiEndpoint/api?results=$amount'));
+    try {
+      http.Response usersResult =
+          await http.get(Uri.parse('$_apiEndpoint/api?results=$amount'));
 
-    return UsersModel();
+      return UsersModel.fromJson(jsonDecode(usersResult.body));
+    } catch (_) {
+      rethrow;
+    }
   }
 }

@@ -9,7 +9,7 @@ final GetIt locator = GetIt.instance;
 void getIt() async {
   if (!locator.isRegistered<UserBloc>()) {
     locator.registerFactory<UserBloc>(
-      () => UserBloc(),
+      () => UserBloc(userService: locator()),
     );
   }
 

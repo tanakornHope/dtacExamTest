@@ -133,7 +133,7 @@ class Location {
   String? city;
   String? state;
   String? country;
-  int? postcode;
+  String? postcode;
   Coordinates? coordinates;
   Timezone? timezone;
 
@@ -181,7 +181,7 @@ class Location {
 }
 
 class Street {
-  int? number;
+  String? number;
   String? name;
 
   Street({this.number, this.name});
@@ -280,7 +280,7 @@ class Login {
 
 class Dob {
   String? date;
-  int? age;
+  String? age;
 
   Dob({this.date, this.age});
 
@@ -340,8 +340,8 @@ class Picture {
 
 class Info {
   String? seed;
-  int? results;
-  int? page;
+  String? results;
+  String? page;
   String? version;
 
   Info({this.seed, this.results, this.page, this.version});
