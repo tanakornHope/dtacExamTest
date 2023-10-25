@@ -5,5 +5,5 @@ part './user_bloc_event.dart';
 part './user_bloc_state.dart';
 
 class UserBloc extends Bloc<UserBlocEvent, UserBlocState> {
-  UserBloc() : super(const UserBlocState()) {}
+  UserBloc() : super(const UserBlocState());
 }
