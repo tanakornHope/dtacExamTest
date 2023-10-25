@@ -40,58 +40,60 @@ class _DisplayUsersInfoState extends State<DisplayUsersInfo> {
             }
             if (state is GetUsersBlocState) {
               state.userViewModel;
-              return ListView.builder(
-                controller: ScrollController(),
-                itemCount: state.userViewModel.length,
-                itemBuilder: (context, index) {
-                  return GFCard(
-                    boxFit: BoxFit.cover,
-                    title: GFListTile(
-                      avatar: GFAvatar(
-                        backgroundImage: NetworkImage(
-                            state.userViewModel[index].imageUrl.toString()),
+              return Scrollbar(
+                child: ListView.builder(
+                  controller: ScrollController(),
+                  itemCount: state.userViewModel.length,
+                  itemBuilder: (context, index) {
+                    return GFCard(
+                      boxFit: BoxFit.cover,
+                      title: GFListTile(
+                        avatar: GFAvatar(
+                          backgroundImage: NetworkImage(
+                              state.userViewModel[index].imageUrl.toString()),
+                        ),
+                        title: Text(state.userViewModel[index].name.toString()),
+                        subTitle:
+                            Text(state.userViewModel[index].gender.toString()),
                       ),
-                      title: Text(state.userViewModel[index].name.toString()),
-                      subTitle:
-                          Text(state.userViewModel[index].gender.toString()),
-                    ),
-                    content: Column(children: [
-                      Row(
-                        children: [
-                          const Expanded(flex: 1, child: Text('Email:')),
-                          Expanded(
-                              flex: 1,
-                              child: Text(
-                                  state.userViewModel[index].email.toString()))
+                      content: Column(children: [
+                        Row(
+                          children: [
+                            const Expanded(flex: 1, child: Text('Email:')),
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                    state.userViewModel[index].email.toString()))
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Expanded(child: Text('Age:')),
+                            Expanded(
+                                child: Text(
+                                    state.userViewModel[index].age.toString()))
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Expanded(
+                                flex: 1, child: Text('Mobile Number:')),
+                            Expanded(
+                                flex: 1,
+                                child: Text(state
+                                    .userViewModel[index].mobileNumber
+                                    .toString()))
+                          ],
+                        )
+                      ]),
+                      buttonBar: GFButtonBar(
+                        children: <Widget>[
+                          Text('User Order: ${index+1}'),
                         ],
                       ),
-                      Row(
-                        children: [
-                          const Expanded(child: Text('Age:')),
-                          Expanded(
-                              child: Text(
-                                  state.userViewModel[index].age.toString()))
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Expanded(
-                              flex: 1, child: Text('Mobile Number:')),
-                          Expanded(
-                              flex: 1,
-                              child: Text(state
-                                  .userViewModel[index].mobileNumber
-                                  .toString()))
-                        ],
-                      )
-                    ]),
-                    buttonBar: GFButtonBar(
-                      children: <Widget>[
-                        Text('User Order: ${index+1}'),
-                      ],
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             }
             if (state is GetUsersErrorBlocState) {
