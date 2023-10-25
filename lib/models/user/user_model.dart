@@ -1,10 +1,10 @@
-class Users {
+class UsersModel {
   List<Results>? results;
   Info? info;
 
-  Users({this.results, this.info});
+  UsersModel({this.results, this.info});
 
-  Users.fromJson(Map<String, dynamic> json) {
+  UsersModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
