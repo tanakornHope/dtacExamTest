@@ -18,42 +18,6 @@ class _DisplayUsersInfoState extends State<DisplayUsersInfo> {
 
   @override
   void initState() {
-    userViewModel.add(UserViewModel(
-      name: 'One',
-      gender: 'Male',
-      email: 'One@gmail.com',
-      age: '10',
-      mobileNumber: '0813556103',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Prayut_2022.jpg/800px-Prayut_2022.jpg',
-    ));
-    userViewModel.add(UserViewModel(
-      name: 'One',
-      gender: 'Male',
-      email: 'One@gmail.com',
-      age: '10',
-      mobileNumber: '0813556103',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Prayut_2022.jpg/800px-Prayut_2022.jpg',
-    ));
-    userViewModel.add(UserViewModel(
-      name: 'One',
-      gender: 'Male',
-      email: 'One@gmail.com',
-      age: '10',
-      mobileNumber: '0813556103',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Prayut_2022.jpg/800px-Prayut_2022.jpg',
-    ));
-    userViewModel.add(UserViewModel(
-      name: 'One',
-      gender: 'Male',
-      email: 'One@gmail.com',
-      age: '10',
-      mobileNumber: '0813556103',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Prayut_2022.jpg/800px-Prayut_2022.jpg',
-    ));
     super.initState();
   }
 
@@ -61,12 +25,85 @@ class _DisplayUsersInfoState extends State<DisplayUsersInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(ENV.appBarTitle),
+        title: const Center(child: Text(ENV.appBarTitle)),
       ),
       body: SizedBox(
         child: BlocConsumer<UserBloc, UserBlocState>(
-          listener: (BuildContext context, state) {},
-          builder: (BuildContext context, Object? state) {
+          listener: (context, state) {},
+          buildWhen: (previous, current) =>
+              current is GetUsersBlocState ||
+              current is GetUsersErrorBlocState ||
+              current is GetUsersLoadingBlocState,
+          builder: (context, state) {
+            if (state is GetUsersLoadingBlocState) {
+              return const Center(child: Text('Loading.'));
+            }
+            if (state is GetUsersBlocState) {
+              state.userViewModel;
+              return ListView.builder(
+                controller: ScrollController(),
+                itemCount: state.userViewModel.length,
+                itemBuilder: (context, index) {
+                  return GFCard(
+                    boxFit: BoxFit.cover,
+                    title: GFListTile(
+                      avatar: GFAvatar(
+                        backgroundImage: NetworkImage(
+                            state.userViewModel[index].imageUrl.toString()),
+                      ),
+                      title: Text(state.userViewModel[index].name.toString()),
+                      subTitle:
+                          Text(state.userViewModel[index].gender.toString()),
+                    ),
+                    content: Column(children: [
+                      Row(
+                        children: [
+                          const Expanded(flex: 1, child: Text('Email:')),
+                          Expanded(
+                              flex: 1,
+                              child: Text(
+                                  state.userViewModel[index].email.toString()))
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Expanded(child: Text('Age:')),
+                          Expanded(
+                              child: Text(
+                                  state.userViewModel[index].age.toString()))
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Expanded(
+                              flex: 1, child: Text('Mobile Number:')),
+                          Expanded(
+                              flex: 1,
+                              child: Text(state
+                                  .userViewModel[index].mobileNumber
+                                  .toString()))
+                        ],
+                      )
+                    ]),
+                    // buttonBar: GFButtonBar(
+                    //   children: <Widget>[
+                    //     GFButton(
+                    //       onPressed: () {},
+                    //       text: 'Buy',
+                    //     ),
+                    //     GFButton(
+                    //       onPressed: () {},
+                    //       text: 'Cancel',
+                    //     ),
+                    //   ],
+                    // ),
+                  );
+                },
+              );
+            }
+            if (state is GetUsersErrorBlocState) {
+              return const Center(child: Text('Error: Something went wrong.'));
+            }
             return const SizedBox.shrink();
           },
         ),

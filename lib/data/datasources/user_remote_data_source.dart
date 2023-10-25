@@ -1,8 +1,7 @@
 import 'dart:convert';
-
+import 'package:dtacexamtest/appConfig/env.dart' as ENV;
 import 'package:dtacexamtest/models/user/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:dtacexamtest/appConfig/env.dart' as ENV;
 
 abstract class UserDataSource {
   Future<UsersModel> getUsersDataSource(String amount);
