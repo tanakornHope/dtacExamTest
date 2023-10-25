@@ -71,10 +71,7 @@ class _DisplayUsersInfoState extends State<DisplayUsersInfo> {
                 title: Text(userViewModel[index].name.toString()),
                 subTitle: Text(userViewModel[index].gender.toString()),
               ),
-              // content: const Text("Some quick example text to build on the card"),
               content: Column(children: [
-                // Text("Some quick example text to build on the card"),
-                // Text("Some quick example text to build on the card")
                 Row(
                   children: [
                     const Expanded(child: Text('Email:')),
