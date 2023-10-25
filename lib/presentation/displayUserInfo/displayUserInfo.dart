@@ -85,18 +85,11 @@ class _DisplayUsersInfoState extends State<DisplayUsersInfo> {
                         ],
                       )
                     ]),
-                    // buttonBar: GFButtonBar(
-                    //   children: <Widget>[
-                    //     GFButton(
-                    //       onPressed: () {},
-                    //       text: 'Buy',
-                    //     ),
-                    //     GFButton(
-                    //       onPressed: () {},
-                    //       text: 'Cancel',
-                    //     ),
-                    //   ],
-                    // ),
+                    buttonBar: GFButtonBar(
+                      children: <Widget>[
+                        Text('User Order: ${index+1}'),
+                      ],
+                    ),
                   );
                 },
               );
